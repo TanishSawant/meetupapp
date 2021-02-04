@@ -6,6 +6,7 @@ import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 import MenuAppBar from "./components/AppBarCustom";
 import MiniDrawer from "./components/CustomDrawer";
+import Landing from "./components/landing";
 
 const useStyles = makeStyles((theme)=>{
 
@@ -18,13 +19,12 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
-      <MiniDrawer />
       <Switch>
         <Route path="/signin" component={SignIn}/>
         <Route path="/signup" component={SignUp}/>
+        <Router path="/dashboard" component={Landing}/>
         <Route path="/" component={Home} />
       </Switch>
-      
     </div>
     </Router>
   );

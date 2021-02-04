@@ -119,8 +119,8 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            MeetUp
+          <Typography variant="h6" noWrap style={{paddingLeft:'38%'}}>
+            Find the right place for you
           </Typography>
         </Toolbar>
       </AppBar>
