@@ -1,7 +1,8 @@
 .main_container {
     height: 100vh;
     /* '../Assets/gettyimages-157334256-612x612.jpg' */
-    background-image: url('../Assets/Benches.jpg');
+    /* background-image: url('../Assets/Benches.jpg'); */
+    background-image: url('https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77701669549.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -12,4 +13,178 @@
     image-rendering: -o-crisp-edges;            /* Opera */
     image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming)*/
     -ms-interpolation-mode: nearest-neighbor;   /* IE (non-standard property) */
+}
+
+
+.shimmer {
+color: black;
+  font-family: "Lato";
+  font-weight: 300;
+  font-size: 1em;
+  margin: 0 auto;
+  padding: 40px 40px 40px 40px;
+  display: inline;
+  margin-bottom: 0;
+}
+
+
+
+.shimmer {
+    text-align: center;
+    color: rgba(255,255,255,0.1);
+    background: -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+    background: -moz-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+    background: gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+    -webkit-background-size: 125px 100%;
+    -moz-background-size: 125px 100%;
+    background-size: 125px 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    -webkit-animation-name: shimmer;
+    -moz-animation-name: shimmer;
+    animation-name: shimmer;
+    -webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: #222;
+  }
+  @-moz-keyframes shimmer {
+    0% {
+      background-position: top left;
+    }
+    100% {
+      background-position: top right;
+    }
+  }
+  @-webkit-keyframes shimmer {
+    0% {
+      background-position: top left;
+    }
+    100% {
+      background-position: top right;
+    }
+  }
+  @-o-keyframes shimmer {
+    0% {
+      background-position: top left;
+    }
+    100% {
+      background-position: top right;
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: top left;
+    }
+    100% {
+      background-position: top right;
+    }
+  }
+  
+@keyframes text-animation {
+  25% {
+    transform: translateX(10px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateX(0px) translateY(0px);
+  }
+}
+
+.image-laptop {
+    width: 50%;
+    height: 100vh;
+}
+
+.img-text-row {
+    height: 100%;
+    top: 0%;
+    padding-left: 10%;
+    width : 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-text-row-text {
+    font-size: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    animation: text-animation 20s infinite;
+}
+
+
+@keyframes example1 {
+  0%   {left:70%; top:0px;}
+  25%  {left:80%; top:200px;}
+  50%  {left:90%; top:400px;}
+  75%  {left:80%; top:200px;}
+  100% {left:70%; top:0px;}
+}
+@keyframes example2 {
+  0%   {left:30%; top:0px;}
+  25%  {left:30%; top:-200px;}
+  50%  {left:40%; top:-400px;}
+  75%  {left:30%; top:-100px;}
+  100% {left:30%; top:0px;}
+}
+@keyframes example3 {
+  0%   {right:10%; top:0px;}
+  25%  {right:20%; top:100px;}
+  50%  {right:20%; top:200px;}
+  75%  {right:15%; top:200px;}
+  100% {right:10%; top:0px;}
+}
+
+
+#svgelem1{
+  position: relative;
+            left: 70%;
+            -webkit-transform: translateX(-20%);
+            -ms-transform: translateX(-20%);
+            transform: translateX(-20%);
+  opacity: 0.05;
+  animation: example1 50s infinite;
+}
+
+#svgelem2{
+  position: relative;
+            left: 30%;
+            -webkit-transform: translateX(-20%);
+            -ms-transform: translateX(-20%);
+            transform: translateX(-20%);
+  opacity: 0.05;
+  animation: example2 30s infinite;
+}
+
+#svgelem3{
+  position: relative;
+            right: 10%;
+            -webkit-transform: translateX(-20%);
+            -ms-transform: translateX(-20%);
+            transform: translateX(-20%);
+  opacity: 0.05;
+  animation: example3 30s ease-in-out infinite;
+}
+
+#svgelem3:hover{
+  opacity: 0.1;
+}
+
+
+#svgelem1:hover{
+  opacity: 0.1;
+}
+
+
+#svgelem2:hover{
+  opacity: 0.1;
 }
