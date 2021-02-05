@@ -4,11 +4,10 @@ import {makeStyles} from '@material-ui/core/styles'
 import {BrowserRouter as Router, Switch, Link, Route} from 'react-router-dom';
 import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
-import MenuAppBar from "./components/AppBarCustom";
-import MiniDrawer from "./components/CustomDrawer";
-import Landing from "./components/landing";
 import Footer from "./components/footer"
 import AuthProvider from "./AuthContext"
+import Landing from "./components/Pages/landing";
+import Profile from "./components/Pages/Profile"
 
 const useStyles = makeStyles((theme)=>{
   
@@ -25,7 +24,8 @@ function App() {
       <Switch>
         <Route path="/signin" component={SignIn}/>
         <Route path="/signup" component={SignUp}/>
-        <Router path="/dashboard" component={Landing}/>
+        <Route path="/dashboard" component={Landing}/>
+        <Route path="/userprofile" component={Profile}/>
         <Route path="/" component={Home} />
       </Switch>
     </div>

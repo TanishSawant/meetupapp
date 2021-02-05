@@ -5,11 +5,10 @@ import {useAuth} from '../../AuthContext'
 
 function Landing() {
     const {currentUser} = useAuth();
+    console.log(currentUser.email)
     return (
         <div>
-            <Container>
-                <h1>Welcome!</h1>
-            </Container>
+            <h1>Welcome!</h1>
         </div>
     )
 }
