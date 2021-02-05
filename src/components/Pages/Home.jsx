@@ -43,7 +43,7 @@ export default function Home() {
   const history = useHistory();
 
   const routeChange = () => {
-    let path = `dashboard`;
+    let path = `signup`;
     history.push(path);
   };
 
