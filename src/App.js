@@ -7,7 +7,8 @@ import SignUp from "./components/SignUp/SignUp";
 import Footer from "./components/footer"
 import AuthProvider from "./AuthContext"
 import Landing from "./components/Pages/landing";
-import Profile from "./components/Pages/Profile"
+import Profile from "./components/Pages/Profile";
+import PrivateRoutes from './components/Pages/PrivateRoutes'
 
 const useStyles = makeStyles((theme)=>{
   
@@ -24,7 +25,7 @@ function App() {
       <Switch>
         <Route path="/signin" component={SignIn}/>
         <Route path="/signup" component={SignUp}/>
-        <Route path="/dashboard" component={Landing}/>
+        <PrivateRoutes path="/dashboard" component={Landing}/>
         <Route path="/userprofile" component={Profile}/>
         <Route path="/" component={Home} />
       </Switch>
