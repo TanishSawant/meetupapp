@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
         // width:'10%'
     },
     main:{
-        borderTop: '1px solid',
-        borderBottom: '1px solid',
+        borderTop: '1px solid lightgrey',
+        borderBottom: '1px solid lightgrey',
         minHeight: '20%',
         display: 'flex',
         justifyContent: 'space-evenly'
