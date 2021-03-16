@@ -24,8 +24,8 @@ function List_events() {
     const classes = useStyles();
     return (
         <List className={classes.root}>
-        <Listitem/>
-        <ListItem alignItems="flex-start">
+            <Listitem />
+            <ListItem alignItems="flex-start">
             <ListItemAvatar>
             <Avatar
                 avatarStyle='Circle'
@@ -57,7 +57,14 @@ function List_events() {
             }
             />
             </ListItem>
-        {/* 
+        </List>
+    )
+}
+
+export default List_events
+
+
+ {/* 
         <Divider variant="inset" component="li" />
         <ListItem alignItems="flex-start">
             <ListItemAvatar>
@@ -124,8 +131,3 @@ function List_events() {
             }
             />
         </ListItem> */}
-        </List>
-    )
-}
-
-export default List_events
