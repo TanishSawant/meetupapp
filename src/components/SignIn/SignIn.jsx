@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import { Container, Typography, Button, TextField } from "@material-ui/core/";
 import {useAuth} from '../../AuthContext';
 import {useHistory} from 'react-router-dom'
+import firestore from 'firebase'
 
 const styles = {
   main_container: {

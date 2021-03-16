@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import { Container, Typography, Button, TextField } from "@material-ui/core/";
 import {useAuth} from '../../AuthContext';
 import {useHistory} from 'react-router-dom'
+import {FirebaseDatabaseProvider} from '@react-firebase/database'
 
 const styles = {
   main_container: {
@@ -67,6 +68,7 @@ function SignUp() {
   };
 
   return (
+    <FirebaseDatabaseProvider>
     <div style={styles.main_container}>
       <Container>
         <Typography
@@ -95,6 +97,7 @@ function SignUp() {
       <Button variant="outlined" onClick={onSubmit}>Sign Me Up!</Button>
         
     </div>
+    </FirebaseDatabaseProvider>
   );
 }
 
