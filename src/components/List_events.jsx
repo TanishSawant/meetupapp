@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -8,6 +8,11 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Listitem from './Listitem'
+import axios from 'axios'
+
+const base = axios.create({
+    baseURL: 'http://localhost:8000/'
+})
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,11 +26,25 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function List_events() {
+
+    const [events, setEvents] = useState([])
+
     const classes = useStyles();
+    useEffect(() => {
+        async function getEvents() {
+            const request = base.get('/events');
+            console.log(request);
+            setEvents(request.data);
+            return request;
+        };
+        getEvents();
+    }, [])
+
     return (
         <List className={classes.root}>
             <Listitem />
-            <ListItem alignItems="flex-start">
+
+            {/* <ListItem alignItems="flex-start">
             <ListItemAvatar>
             <Avatar
                 avatarStyle='Circle'
@@ -56,7 +75,7 @@ function List_events() {
                 </React.Fragment>
             }
             />
-            </ListItem>
+            </ListItem> */}
         </List>
     )
 }
