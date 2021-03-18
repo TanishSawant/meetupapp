@@ -3,7 +3,7 @@ import {React, useState, useEffect} from 'react'
 import {useAuth} from '../../AuthContext'
 import Logo_top from '../../Assets/landing_top.svg'
 import {Typography} from '@material-ui/core'
-import {useHistory} from 'react-router-dom'
+import {useHistory, Link} from 'react-router-dom'
 // import { BorderTop } from '@material-ui/icons'
 import Button from '@material-ui/core/Button';
 import List_events from '../List_events';
@@ -37,17 +37,17 @@ function Landing() {
     }
 
     useEffect(() => {
-        async function getGroups() {
-            const request = base.get('/groups')
-            .then((request) =>{
-                // console.log(request.data);
-                setGroups(request.data);
-            });
-            console.log("Hello groups");
-            console.log(groups);
-            return request;
-        };
-        getGroups();
+        // async function getGroups() {
+        //     const request = base.get('/groups')
+        //     .then((request) =>{
+        //         // console.log(request.data);
+        //         setGroups(request.data);
+        //     });
+        //     console.log("Hello groups");
+        //     console.log(groups);
+        //     return request;
+        // };
+        // getGroups();
     }, [])
         
     return (
@@ -78,13 +78,9 @@ function Landing() {
                 </div>
                 <div>
                     <MediaCard/>
-                    <h1>Groups:</h1>
-                        <ul>
-                            {groups.map(group =>{
-                                
-                                <li>group</li>
-                            })}
-                        </ul>
+                    {/* <div style={styles.link_create_grps}>
+                        <Link to={'/Create_groups'} style={{ textDecoration: 'none'}}>Create A Group</Link>
+                    </div> */}
                 </div>
             </div>
         </div>
@@ -92,8 +88,13 @@ function Landing() {
 }
 
 const styles = {
+    link_create_grps:{
+        marginTop: '50px',
+        textDecoration: 'none'
+    },
     mediacard:{
-        marginLeft: '50px'
+        marginLeft: '50px',
+        marginBottom: '50px'
     },
     listevents: {
         borderRight: '1px solid',

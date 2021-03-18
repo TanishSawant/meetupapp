@@ -60,11 +60,12 @@ function Make_group() {
             id: makeid(8),
             members: [currentUser.email]
         };
-        const res = base.post("/groups", {grp})
-        .then(res => {
-            console.log("group created!!")
-            console.log(res.data);
+        base.post('/groups', grp)
+        .then(response => console.log(response.data))
+        .catch(error => {
+            console.error('There was an error!', error);
         });
+        routeChange();
       };
 
     const [title, setTitle] = useState("");
@@ -83,6 +84,7 @@ function Make_group() {
     return (
         <div style={styles.main_container}>
             <h1>Create Group</h1>
+            <h3>Creator: {currentUser.email}</h3>
             <TextField
                 label="Title"
                 value={title}
