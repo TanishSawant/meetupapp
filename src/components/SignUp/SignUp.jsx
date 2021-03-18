@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { Container, Typography, Button, TextField } from "@material-ui/core/";
 import {useAuth} from '../../AuthContext';
-import {useHistory} from 'react-router-dom'
+import {useHistory, Link, Redirect} from 'react-router-dom'
 import {FirebaseDatabaseProvider} from '@react-firebase/database'
 
 const styles = {
@@ -79,7 +79,7 @@ function SignUp() {
           Open the door to the Awareness
         </Typography>
       </Container> 
-      {!errorOccurred && <p style={{color:'red'}}>Could not sign in</p>}
+      {errorOccurred && <p style={{color:'red'}}>Could not sign in</p>}
       <TextField
         label="Email"
         value={email}
@@ -95,7 +95,8 @@ function SignUp() {
         style={styles.textFields}
       />
       <Button variant="outlined" onClick={onSubmit}>Sign Me Up!</Button>
-        
+      {/* <Button onClick={history.push('/signin')}>Already Have An Account</Button> */}
+        <Link to={'/signin'} style={{ textDecoration: 'none', marginTop:'25px' }}>Already have an Account</Link>
     </div>
     </FirebaseDatabaseProvider>
   );

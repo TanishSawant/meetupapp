@@ -78,7 +78,7 @@ function SignIn() {
           Open the door to the Awareness
         </Typography>
       </Container> 
-      {!errorOccurred && <p style={{color:'red'}}>Could not sign in</p>}
+      {errorOccurred && <p style={{color:'red'}}>Could not sign in</p>}
       <TextField
         label="Email"
         value={email}

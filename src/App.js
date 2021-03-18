@@ -9,6 +9,7 @@ import AuthProvider from "./AuthContext"
 import Landing from "./components/Pages/landing";
 import Profile from "./components/Pages/Profile";
 import PrivateRoutes from './components/Pages/PrivateRoutes'
+import Make_groups from "./components/Pages/Groups/make_group"
 
 const useStyles = makeStyles((theme)=>{
   
@@ -27,6 +28,7 @@ function App() {
         <Route path="/signup" component={SignUp}/>
         <PrivateRoutes path="/dashboard" component={Landing}/>
         <Route path="/userprofile" component={Profile}/>
+        <Route path="/create_groups" component={Make_groups}/>
         <Route path="/" component={Home} />
       </Switch>
     </div>
