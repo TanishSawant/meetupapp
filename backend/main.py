@@ -9,6 +9,11 @@ import string
 from typing import List
 import datetime
 from six import u
+# import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
 # cred={
 #   'apiKey': "AIzaSyDZiQxLHFbamQ7VRSW67fmzXoV7xUqhsac",
 #   'authDomain': "meetup-8405b.firebaseapp.com",
@@ -19,10 +24,24 @@ from six import u
 #   'measurementId': "G-W0DVPH0NKT"
 # }
 
-cred = credentials.Certificate("service.json")
+cred = credentials.Certificate("./service.json")
 firebase_admin.initialize_app(cred)
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",
+    "localhost:3000"
+]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 db = firestore.client()
 
@@ -153,3 +172,6 @@ def get_all_events():
         print(d.to_dict())
         events.append(d.to_dict())
     return events
+
+# if __name__ == "__main__":
+#     uvicorn.run("app.api:app", host="0.0.0.0", port=8000, reload=True)

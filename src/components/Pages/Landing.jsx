@@ -1,17 +1,27 @@
-import {React, useState} from 'react'
-import {Container} from '@material-ui/core'
+import {React, useState, useEffect} from 'react'
+// import {Container} from '@material-ui/core'
 import {useAuth} from '../../AuthContext'
 import Logo_top from '../../Assets/landing_top.svg'
 import {Typography} from '@material-ui/core'
 import {useHistory} from 'react-router-dom'
-import { BorderTop } from '@material-ui/icons'
+// import { BorderTop } from '@material-ui/icons'
 import Button from '@material-ui/core/Button';
 import List_events from '../List_events';
 import MediaCard from '../MediaCard'
+import firebase from '../../firebase'
+
+import axios from 'axios'
+
+
+const base = axios.create({
+    baseURL: 'http://localhost:8000/'
+})
 
 function Landing() {
+    const ref = firebase.firestore().collection("Groups")
     const {currentUser, logout} = useAuth();
-    const {e1, setError} = useState("");
+    const [e1, setError] = useState("");
+    const [groups, setGroups] = useState([]);
     const history = useHistory();
     if(currentUser!=null){
         console.log(currentUser.email)
@@ -25,6 +35,20 @@ function Landing() {
             setError(error);
         }
     }
+
+    useEffect(() => {
+        async function getGroups() {
+            const request = base.get('/groups')
+            .then((request) =>{
+                // console.log(request.data);
+                setGroups(request.data);
+            });
+            console.log("Hello groups");
+            console.log(groups);
+            return request;
+        };
+        getGroups();
+    }, [])
         
     return (
         <div>
@@ -48,11 +72,19 @@ function Landing() {
             </div>
             <div style={styles.main_body_div}>
                 <div style={styles.listevents} >
+                    <h1>Events:</h1>
                     <List_events />
                     {/* <MediaCard/> */}
                 </div>
                 <div>
                     <MediaCard/>
+                    <h1>Groups:</h1>
+                        <ul>
+                            {groups.map(group =>{
+                                
+                                <li>group</li>
+                            })}
+                        </ul>
                 </div>
             </div>
         </div>

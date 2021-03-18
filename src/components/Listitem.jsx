@@ -33,16 +33,17 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 
-function Listitem() {
+function Listitem({event}) {
     const classes = useStyles();
     return (
         <div style={styles.main}>
             <div style={styles.item_image}>
-                <img width="170px" height="100px" src="https://img.pngio.com/events-png-15-clip-arts-for-free-download-on-een-2019-event-png-342_147.png" alt=""/>
+                {/* <img width="170px" height="100px" src="https://img.pngio.com/events-png-15-clip-arts-for-free-download-on-een-2019-event-png-342_147.png" alt=""/> */}
             </div>
             <div>
-                <h1>New Event!</h1>
-                <p>This is how new even would look like!!!</p>
+                <h1>{event.title}</h1>
+                <p>{event.topic}</p>
+                <p>Host: {event.host}</p>
             </div>
         </div>
     )
