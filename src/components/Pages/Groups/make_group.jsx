@@ -8,6 +8,7 @@ const base = axios.create({
     baseURL: 'http://localhost:8000/'
 })
 
+
 const styles = {
     main_container: {
       padding: "0%",
@@ -16,7 +17,6 @@ const styles = {
       alignItems: "center",
       flexDirection: "column",
       margin: "0%",
-      height: "100vh",
       width: "100%",
     },
     typography_heading: {
@@ -29,9 +29,22 @@ const styles = {
       marginBottom: "25px",
       width: "50%",
     },
+
+    secondaryContainer: {
+      padding:'1%',
+      backgroundColor: 'white',
+      height:'100vh',
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
+      width: "50%",
+      marginTop: "5%",
+      marginBottom: "5%"
+    }
   };
 
 function Make_group() {
+
     const {currentUser} = useAuth();
     const history = useHistory();
 
@@ -58,7 +71,8 @@ function Make_group() {
             topic: topic,
             Creator: currentUser.email,
             id: makeid(8),
-            members: [currentUser.email]
+            members: [currentUser.email],
+            description: desc
         };
         base.post('/groups', grp)
         .then(response => console.log(response.data))
@@ -70,6 +84,7 @@ function Make_group() {
 
     const [title, setTitle] = useState("");
     const [topic, setTopic] = useState("");
+    const [desc , setDesc] = useState("");
 
     const handleChangeTitle = (e) => {
         console.log(e.target.value);
@@ -81,8 +96,14 @@ function Make_group() {
         setTopic(e.target.value);
     };
 
+    const handleChangeDesc = (e) => {
+      console.log(e.target.value);
+      setDesc(e.target.value);
+  };
+
     return (
         <div style={styles.main_container}>
+          <div style={styles.secondaryContainer}>
             <h1>Create Group</h1>
             <h3>Creator: {currentUser.email}</h3>
             <TextField
@@ -101,7 +122,17 @@ function Make_group() {
                 style={styles.textFields}
             />
             
-            <Button variant="outlined" onClick={onSubmit}>Create Group</Button>
+            <TextField
+                label="Desc"
+                value={desc}
+                onChange={handleChangeDesc}
+                type="text"
+                style={styles.textFields}
+            />
+
+            <Button variant="outlined" onClick={onSubmit} style={{marginTop:'5%', marginBottom:'5%'}}>Create Group</Button>
+            
+            </div>
         </div>
     )
 }

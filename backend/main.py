@@ -58,6 +58,7 @@ class Group(BaseModel):
     members: List[str] = []
     topic: str
     id: str
+    description: str
 
 
 class Event(BaseModel):
@@ -106,6 +107,7 @@ def add_group(request: Group):
             u'members': request.members,
             u'topic': request.topic.upper(),
             u'id': request.id.upper(),
+            u'description': request.description,
         })
         return "Done"
     except:
