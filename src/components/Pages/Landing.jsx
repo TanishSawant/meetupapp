@@ -78,10 +78,9 @@ function Landing() {
                 </div>
                 <div>
                     <MediaCard/>
-                    {/* <div style={styles.link_create_grps}>
-                        <Link to={'/Create_groups'} style={{ textDecoration: 'none'}}>Create A Group</Link>
-                    </div> */}
+                    <Link to={'/mygroups'} style={{textDecoration:'none', marginTop:'2%'}}>My Groups</Link>
                 </div>
+
             </div>
         </div>
     )

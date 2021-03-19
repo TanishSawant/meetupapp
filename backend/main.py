@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Dict, Optional
 from fastapi import FastAPI
 import firebase_admin
 from firebase_admin import credentials
@@ -106,7 +106,7 @@ def add_group(request: Group):
             u'Creator': request.Creator,
             u'members': request.members,
             u'topic': request.topic.upper(),
-            u'id': request.id.upper(),
+            u'id': request.id,
             u'description': request.description,
         })
         return "Done"
@@ -159,7 +159,7 @@ def add_event(request: Event):
             u'host': request.host,
             u'people_going': request.people_going,
             u'topic': request.topic.upper(),
-            u'id': request.id.upper(),
+            u'id': request.id,
             u'online': request.online
         })
         return "Done"
@@ -174,6 +174,17 @@ def get_all_events():
         print(d.to_dict())
         events.append(d.to_dict())
     return events
+
+@app.post('/groups/{id}/{member}')
+def joinGroupById(id:str, member: str):
+    group: Dict = get_group_by_id(id)
+    print('********************************')
+    print(group)
+    group["members"].append(member)
+    ref = db.collection(u'Groups').document(id)
+    ref.update(group)
+    return "Done!!"
+
 
 # if __name__ == "__main__":
 #     uvicorn.run("app.api:app", host="0.0.0.0", port=8000, reload=True)

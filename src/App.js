@@ -11,6 +11,7 @@ import Profile from "./components/Pages/Profile";
 import PrivateRoutes from './components/Pages/PrivateRoutes';
 import Make_groups from "./components/Pages/Groups/make_group";
 import GroupList from "./components/Pages/Groups/group_list"
+import YourGroups from './components/Pages/Groups/YourGroups';
 
 const useStyles = makeStyles((theme)=>{
   
@@ -31,6 +32,7 @@ function App() {
         <Route path="/userprofile" component={Profile}/>
         <Route path="/create_groups" component={Make_groups}/>
         <Route path="/groups" component={GroupList}/>
+        <Route path="/mygroups" component={YourGroups}/>
         <Route path="/" component={Home} />
       </Switch>
     </div>
