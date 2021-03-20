@@ -12,6 +12,9 @@ import PrivateRoutes from './components/Pages/PrivateRoutes';
 import Make_groups from "./components/Pages/Groups/make_group";
 import GroupList from "./components/Pages/Groups/group_list"
 import YourGroups from './components/Pages/Groups/YourGroups';
+import EventDetails from './components/Pages/Events/EventDetails';
+import EventsForm from './components/Pages/Events/Make_events';
+
 
 const useStyles = makeStyles((theme)=>{
   
@@ -29,10 +32,12 @@ function App() {
         <Route path="/signin" component={SignIn}/>
         <Route path="/signup" component={SignUp}/>
         <PrivateRoutes path="/dashboard" component={Landing}/>
-        <Route path="/userprofile" component={Profile}/>
-        <Route path="/create_groups" component={Make_groups}/>
-        <Route path="/groups" component={GroupList}/>
-        <Route path="/mygroups" component={YourGroups}/>
+        <PrivateRoutes path="/userprofile" component={Profile}/>
+        <PrivateRoutes path="/create_groups" component={Make_groups}/>
+        <PrivateRoutes path="/create_event" component={EventsForm}/>
+        <PrivateRoutes path="/groups" component={GroupList}/>
+        <Route path="/events/:id"><EventDetails/></Route>
+        <PrivateRoutes path="/mygroups" component={YourGroups}/>
         <Route path="/" component={Home} />
       </Switch>
     </div>

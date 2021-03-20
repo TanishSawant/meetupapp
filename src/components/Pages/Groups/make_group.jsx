@@ -61,7 +61,7 @@ function Make_group() {
            result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
         return result;
-     }    
+     }
 
     const onSubmit = (e) => {
         console.log("object")

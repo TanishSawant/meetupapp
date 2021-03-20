@@ -57,29 +57,32 @@ export default function GroupCard({ group }) {
   const [expanded, setExpanded] = React.useState(false);
 //   const {currentUser} = useAuth();
   const [user, setUser] = useState("");
-  const {history} = useHistory();
+  const history = useHistory();
   const {currentUser} = useAuth();
 
   useEffect(() => {
-    if (currentUser == null){
+    if (currentUser == undefined){
         history.push('/signin');
     }
     setUser(currentUser.email);
     console.log("***************************");
     console.log(currentUser.email);
-  }, [currentUser])
+  });
 
   const joinGroup = (e) => {
     e.preventDefault();
     base.post(`groups/${group.id}/${user}`, group.id, user.email)
     console.log("Joined group!!")
+    // window.location.reload();
   }
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  return (
+  return (    
+    <div>
+    {currentUser != undefined &&
     <Card className={classes.root}>
       <CardHeader
         avatar={
@@ -122,15 +125,16 @@ export default function GroupCard({ group }) {
           <Typography paragraph>
             <b>Topic:</b> {group.topic}
           </Typography>
-            {group.members.includes(user) && <Button variant="outlined" onClick={joinGroup}>
+            {!group.members.includes(user) && <Button variant="outlined" onClick={joinGroup}>
                 Join Group as {user}
             </Button>
             }
-            {!group.members.includes(user) && 
+            {group.members.includes(user) && 
                 <p style={{color: 'green'}}>You are already a member of this group!</p>
             }
         </CardContent>
       </Collapse>
-    </Card>
+    </Card>}
+    </div>
   );
 }

@@ -1,12 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
+import {Link} from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Listitem({event}) {
     const classes = useStyles();
+    console.log(event.id)
     return (
         <div style={styles.main}>
             <div style={styles.item_image}>
@@ -44,6 +39,8 @@ function Listitem({event}) {
                 <h1>{event.title}</h1>
                 <p>{event.topic}</p>
                 <p>Host: {event.host}</p>
+                <Link to={`/events/${event.id}`}>See the Details</Link>
+                
             </div>
         </div>
     )

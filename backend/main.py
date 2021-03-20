@@ -68,9 +68,10 @@ class Event(BaseModel):
     topic: str
     id: str
     link: str
-    date: datetime.date
-    time: datetime.time
+    date: str
+    time: str
     online: bool
+    description: str
 
 def randomString(stringLength=5):
     letters = string.ascii_lowercase
@@ -92,7 +93,7 @@ def groups():
     grps = []
     data = db.collection(u'Groups').stream()
     for d in data:
-        print(d.to_dict())
+        # print(d.to_dict())
         grps.append(d.to_dict())
     return grps
 
@@ -119,7 +120,7 @@ def add_group(request: Group):
 def get_group_by_id(id:str):
     grps = groups()
     print("-----------------------")
-    print(grps)
+    # print(grps)
     for g in grps:
         if g["id"] == id:
             return g
@@ -132,7 +133,7 @@ def get_group_by_user(name:str):
     grps = groups()
     # grps = groups()
     print("-----------------------")
-    print(grps)
+    # print(grps)
     for g in grps:
         if isPresent(name, g["members"]):
             return g
@@ -144,7 +145,7 @@ def get_group_by_topic_name(topic:str):
     grps = groups()
     # grps = groups()
     print("-----------------------")
-    print(grps)
+    # print(grps)
     for g in grps:
         if g["topic"]==topic:
             return g
@@ -152,7 +153,7 @@ def get_group_by_topic_name(topic:str):
     
 @app.post("/events")
 def add_event(request: Event):
-    ref = db.collection(u'Events').document(request.title)
+    ref = db.collection(u'Events').document(request.id)
     try:
         ref.set({
             u'title': request.title.upper(),
@@ -160,18 +161,24 @@ def add_event(request: Event):
             u'people_going': request.people_going,
             u'topic': request.topic.upper(),
             u'id': request.id,
-            u'online': request.online
+            u'online': request.online,
+            u'link': request.link,
+            u'time': request.time,
+            u'date': request.date,
+            u'description': request.description
         })
-        return "Done"
-    except:
-        return "Error"
+        print(request)
+        return "Event created!!"
+    except Exception as e:
+        print(e)
+        return e
 
 @app.get('/events')
 def get_all_events():
     events = []
     data = db.collection(u'Events').stream()
     for d in data:
-        print(d.to_dict())
+        # print(d.to_dict())
         events.append(d.to_dict())
     return events
 
@@ -179,11 +186,21 @@ def get_all_events():
 def joinGroupById(id:str, member: str):
     group: Dict = get_group_by_id(id)
     print('********************************')
-    print(group)
+    # print(group)
     group["members"].append(member)
     ref = db.collection(u'Groups').document(id)
     ref.update(group)
     return "Done!!"
+
+
+@app.get('/events/{id}')
+def getEventById(id:str):
+    events = get_all_events()
+    for event in events:
+        if event["id"] == id:
+            return event
+    return "Event not found"
+
 
 
 # if __name__ == "__main__":

@@ -26,7 +26,8 @@ function Landing() {
     if(currentUser!=null){
         console.log(currentUser.email)
     }
-    async function handleLogout() {
+    async function handleLogout(e) {
+        e.preventDefault();
         setError("");
         try {
             await logout;
@@ -34,6 +35,11 @@ function Landing() {
         } catch (error) {
             setError(error);
         }
+    }
+
+    function handleCreateEvent(e) {
+        e.preventDefault();
+        history.push('/create_event');
     }
 
     useEffect(() => {
@@ -58,7 +64,8 @@ function Landing() {
                     </div>
                     <div style={styles.nav_btn_grp}>
                         <Button onClick={handleLogout}>Logout</Button>
-                        <Button>Profile</Button>
+                        <Button onClick={handleCreateEvent}>New Event</Button>
+                        {/* <Button>Profile</Button> */}
                     </div>
                 </div>
             <div style={styles.head_banner}>
@@ -74,7 +81,6 @@ function Landing() {
                 <div style={styles.listevents} >
                     <h1>Events:</h1>
                     <List_events />
-                    {/* <MediaCard/> */}
                 </div>
                 <div>
                     <MediaCard/>
