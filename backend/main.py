@@ -72,6 +72,9 @@ class Event(BaseModel):
     time: str
     online: bool
     description: str
+    image: str
+    details: str
+    prereqs: str
 
 def randomString(stringLength=5):
     letters = string.ascii_lowercase
@@ -165,7 +168,10 @@ def add_event(request: Event):
             u'link': request.link,
             u'time': request.time,
             u'date': request.date,
-            u'description': request.description
+            u'description': request.description,
+            u'image': request.image,
+            u'prereqs': request.prereqs,
+            u'details': request.details
         })
         print(request)
         return "Event created!!"
@@ -180,7 +186,15 @@ def get_all_events():
     for d in data:
         # print(d.to_dict())
         events.append(d.to_dict())
+    i = 0
+    for event in events:
+        print(event["date"])
+        _date = datetime.datetime.strptime(event["date"], '%Y-%m-%d').date()
+        if _date < datetime.datetime.now().date():
+            events.remove(event)
+        i+=1
     return events
+
 
 @app.post('/groups/{id}/{member}')
 def joinGroupById(id:str, member: str):
@@ -192,6 +206,15 @@ def joinGroupById(id:str, member: str):
     ref.update(group)
     return "Done!!"
 
+@app.post('/events/{id}/{member}')
+def joinEventById(id:str, member: str):
+    event: Dict = getEventById(id)
+    print('********************************')
+    # print(group)
+    event["people_going"].append(member)
+    ref = db.collection(u'Events').document(id)
+    ref.update(event)
+    return "Done!!"
 
 @app.get('/events/{id}')
 def getEventById(id:str):

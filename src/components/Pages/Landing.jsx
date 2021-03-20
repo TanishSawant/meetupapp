@@ -41,7 +41,10 @@ function Landing() {
         e.preventDefault();
         history.push('/create_event');
     }
-
+    function handleMyEvents(e) {
+        e.preventDefault();
+        history.push('/myevents');
+    }
     useEffect(() => {
         // async function getGroups() {
         //     const request = base.get('/groups')
@@ -65,6 +68,7 @@ function Landing() {
                     <div style={styles.nav_btn_grp}>
                         <Button onClick={handleLogout}>Logout</Button>
                         <Button onClick={handleCreateEvent}>New Event</Button>
+                        <Button onClick={handleMyEvents}>My Events</Button>
                         {/* <Button>Profile</Button> */}
                     </div>
                 </div>
@@ -79,7 +83,7 @@ function Landing() {
             </div>
             <div style={styles.main_body_div}>
                 <div style={styles.listevents} >
-                    <h1>Events:</h1>
+                    <h1>Upcoming Events:</h1>
                     <List_events />
                 </div>
                 <div>

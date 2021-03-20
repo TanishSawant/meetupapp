@@ -39,7 +39,7 @@ function EventsForm() {
     if (day.length < 2) 
         day = '0' + day;
 
-    return [year, month, day].join('');
+    return [year, month, day].join('-');
 }
 
   const onSubmit = (e) => {
@@ -55,7 +55,10 @@ function EventsForm() {
         date: formatDate(date),
         time: time,
         online: true,
-        description: desc
+        description: desc,
+        image: image,
+        details: details,
+        prereqs: prer
     };
     base
       .post("/events", event)
@@ -72,6 +75,9 @@ function EventsForm() {
   const [link, setLink] = useState("");
   const [date, setDate] = useState(Date('Sun May 11,2014'));
   const [time, setTime] = useState("");
+  const [image, setImage] = useState("")
+  const [details, setDetails] = useState("")
+  const [prer, setPrer] = useState("")
 
 //   const [_online, setOnline] = useState(true);
 
@@ -79,7 +85,14 @@ function EventsForm() {
     console.log(e.target.value);
     setTitle(e.target.value);
   };
-
+  const handleChangeDetails = (e) => {
+    console.log(e.target.value);
+    setDetails(e.target.value);
+  };
+  const handleChangePrer = (e) => {
+    console.log(e.target.value);
+    setPrer(e.target.value);
+  };
   const handleChangeTopic = (e) => {
     console.log(e.target.value);
     setTopic(e.target.value);
@@ -93,6 +106,11 @@ function EventsForm() {
   const handleChangeLink = (e) => {
     console.log(e.target.value);
     setLink(e.target.value);
+  };
+
+  const handleChangeImage = (e) => {
+    console.log(e.target.value);
+    setImage(e.target.value);
   };
 
   return (
@@ -123,6 +141,14 @@ function EventsForm() {
             onChange={handleChangeDesc}
             type="text"
             style={styles.textFields}
+            multiline={true}
+          />
+          <TextField
+            label="Link Of the Event Thumbnail image"
+            value={image}
+            onChange={handleChangeImage}
+            type="text"
+            style={styles.textFields}
           />
           <TextField
             label="Link To the Event Meet"
@@ -131,6 +157,23 @@ function EventsForm() {
             type="text"
             style={styles.textFields}
           />
+          <TextField
+            label="Details"
+            value={details}
+            onChange={handleChangeDetails}
+            type="text"
+            style={styles.textFields}
+            multiline={true}
+          />
+          <TextField
+            label="Expected Prior Knowledge"
+            value={prer}
+            onChange={handleChangePrer}
+            type="text"
+            style={styles.textFields}
+            multiline={true}
+          />
+          
           <TextField
             id="Date"
             label="Next appointment"
@@ -147,11 +190,12 @@ function EventsForm() {
             InputLabelProps={{
               shrink: true,
             }}
+            style={styles.textFields}
           />
-
+        
         <TextField
             id="time"
-            label="Alarm clock"
+            label="Time"
             type="time"
             value={time}
             onChange={(value) => {setTime(value.target.value);console.log(value)}}
@@ -163,6 +207,7 @@ function EventsForm() {
             inputProps={{
             step: 300, // 5 min
             }}
+            style = {styles.textFields}
         />
           <Button
             variant="outlined"
@@ -201,7 +246,7 @@ const styles = {
   secondaryContainer: {
     padding: "1%",
     backgroundColor: "white",
-    height: "100vh",
+    maxheight: "500vh",
     display: "flex",
     alignItems: "center",
     flexDirection: "column",

@@ -61,17 +61,17 @@ export default function GroupCard({ group }) {
   const {currentUser} = useAuth();
 
   useEffect(() => {
-    if (currentUser == undefined){
-        history.push('/signin');
-    }
     setUser(currentUser.email);
     console.log("***************************");
     console.log(currentUser.email);
   });
+  useEffect(() => {
+    console.log(user);
+  }, [user])
 
   const joinGroup = (e) => {
     e.preventDefault();
-    base.post(`groups/${group.id}/${user}`, group.id, user.email)
+    base.post(`groups/${group.id}/${user}`, group.id, user)
     console.log("Joined group!!")
     // window.location.reload();
   }
