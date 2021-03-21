@@ -71,7 +71,8 @@ export default function GroupCard({ group }) {
 
   const joinGroup = (e) => {
     e.preventDefault();
-    base.post(`groups/${group.id}/${user}`, group.id, user)
+    const params = [group.id, user]
+    base.post(`groups/${group.id}/${user}`, params)
     console.log("Joined group!!")
     // window.location.reload();
   }

@@ -225,6 +225,14 @@ def getEventById(id:str):
     return "Event not found"
 
 
+@app.get('/groups/gettopics/topics/512')
+def getTopicsForGroups():
+    topics = set()
+    grps = groups()
+    for group in grps:
+        topics.add(group["topic"])
+    return topics
+
 
 # if __name__ == "__main__":
 #     uvicorn.run("app.api:app", host="0.0.0.0", port=8000, reload=True)
