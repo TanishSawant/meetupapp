@@ -28,7 +28,7 @@ function EventDetails(props) {
   // }
 
   const sendEmail = (parameters) => {
-    emailjs.sendForm('gmail', 'template_2utmm0b', parameters, 'user_NXdsmzIIiTz4UvZSCC87Z')
+    emailjs.send('service_4ak6lhq', 'template_2utmm0b', parameters, 'user_NXdsmzIIiTz4UvZSCC87Z')
       .then((result) => {
           console.log(result.text);
       }, (error) => {
@@ -72,10 +72,10 @@ function EventDetails(props) {
     base.post(`events/${event.id}/${currentUser.email}`, props)
     console.log("You are going!!");
     const params = {
-      subject: 'Event Registration WeMeet',
-      message: `The link to the event is: <a>${event.link}</a>
+      message: `The link to the event is: ${event.link}
         Please do not share this link with others.
-      `
+      `,
+      to_email: currentUser.email
     }
     sendEmail(params);
     history.push('/dashboard');

@@ -57,11 +57,15 @@ function SignIn() {
     try {
         setError("");
         setErrorOccurred(false);
-        signIn(email, pwd);
-        console.log("Signed in!"); 
-        routeChange();   
+        const e = signIn(email, pwd);
+        console.log("Signed in!");
+        console.log(e)
+        if(e==null){
+          routeChange();
+        }
     } catch (error) {
         alert("Error Occurred!")
+        console.log(error)
         setErrorOccurred(true);
         setError(error);
     }
