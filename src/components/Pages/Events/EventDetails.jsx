@@ -4,6 +4,8 @@ import axios from "axios";
 import HideAppBar from "../../../CustomAppBar";
 import { Button, Typography } from "@material-ui/core";
 import {useAuth} from '../../../AuthContext'
+import CustomJoinEventButton from "./customJoinEventButton";
+import emailjs from 'emailjs-com';
 
 const base = axios.create({
   baseURL: "http://localhost:8000/",
@@ -14,6 +16,7 @@ function EventDetails(props) {
   const [event, setEvent] = useState({});
   const {currentUser} = useAuth();
   const history = useHistory();
+  const [alreadyIn, setIn] = useState(false);
 
   // async function getEvents() {
   //     const res = base.get(`/events/${props.match.params.id}`).then((res) => {
@@ -24,10 +27,19 @@ function EventDetails(props) {
   //     return event;
   // }
 
+  const sendEmail = (parameters) => {
+    emailjs.sendForm('gmail', 'template_2utmm0b', parameters, 'user_NXdsmzIIiTz4UvZSCC87Z')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+  }
+
   useEffect(() => {
     async function getEvents() {
       const res = base.get(`events/${props.match.params.id}`).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setEvent(res.data);
       });
       return res;
@@ -40,11 +52,32 @@ function EventDetails(props) {
   }, [event]);
 
 
+  // useEffect(() => {
+  //   setPeople(event.people_going);
+  // }, [event]);
+
+  // useEffect(() => {
+  //   console.log(people_going);
+  // }, [people_going]);
+
+
   const joinEvent = (e) => {
     e.preventDefault();
     props = [event.id, currentUser.email]
+    if(event.people_going.includes(currentUser.email)){
+      console.log("Already in!!")
+      setIn(true);
+      return <h1>Already in!!</h1>
+    }
     base.post(`events/${event.id}/${currentUser.email}`, props)
     console.log("You are going!!");
+    const params = {
+      subject: 'Event Registration WeMeet',
+      message: `The link to the event is: <a>${event.link}</a>
+        Please do not share this link with others.
+      `
+    }
+    sendEmail(params);
     history.push('/dashboard');
   }
 
@@ -56,6 +89,7 @@ function EventDetails(props) {
         <div style={styles.scheduleDiv}>
           <h3>Date: {event.date} </h3>
           <h3>Time: {event.time}</h3>
+          
         </div>
         <div style={styles.textDiv}>
           <Typography variant="body1">
@@ -74,13 +108,14 @@ function EventDetails(props) {
             <b>Prior Knowledge: </b>
             {event.prereqs}
           </Typography>
-          {/* <Button variant="outlined" onClick={joinEvent}>Attend Event</Button> */}
           {
-              !event.people_going.includes(currentUser.email) && <Button variant="outlined" onClick={joinEvent}>Attend Event</Button>
+            !alreadyIn && <Button variant="outlined" onClick={joinEvent}>Attend Event</Button>
           }
           {
-              event.people_going.includes(currentUser.email) && <h5 style={{color: 'green'}}>You are Going for this Event!</h5>
+            alreadyIn && <h5 style={{color: 'green'}}>You are Going for this Event!</h5>
           }
+
+          {/* <CustomJoinEventButton event={event} onPress={joinEvent} currentUser={currentUser} /> */}
           <hr />
           <br />
         </div>
