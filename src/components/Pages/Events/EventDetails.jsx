@@ -75,7 +75,8 @@ function EventDetails(props) {
       message: `The link to the event is: ${event.link}
         Please do not share this link with others.
       `,
-      to_email: currentUser.email
+      to_email: currentUser.email,
+      title: event.title,
     }
     sendEmail(params);
     history.push('/dashboard');

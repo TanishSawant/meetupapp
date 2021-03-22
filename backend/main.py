@@ -234,5 +234,13 @@ def getTopicsForGroups():
     return topics
 
 
+@app.get('/events/gettopics/topics/512')
+def getTopicsForGroups():
+    topics = set()
+    events = get_all_events()
+    for event in events:
+        topics.add(event["topic"])
+    return topics
+
 # if __name__ == "__main__":
 #     uvicorn.run("app.api:app", host="0.0.0.0", port=8000, reload=True)

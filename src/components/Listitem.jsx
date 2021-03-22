@@ -17,11 +17,15 @@ const styles = {
   main: {
     borderTop: "1px solid lightgrey",
     borderBottom: "1px solid lightgrey",
-    minHeight: "20%",
+    minHeight: "15%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
-    backgroundColor: "#FFFFEF",
+    backgroundColor: "#FFFFFF",
+  },
+  outer: {
+    display: "flex",
+    flexDirection: "row",
   }
 };
 
@@ -29,15 +33,20 @@ function Listitem({ event }) {
   const classes = useStyles();
   console.log(event.id);
   return (
+    <div style={styles.outer}>
+      {event.image? 
+      <img src={event.image} alt="" srcset="" width="250px" height="200px" style={{borderRadius: "15px", margin: "15px"}}/>
+        : <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAA1BMVEX//wCKxvRFAAAASElEQVR4nO3BgQAAAADDoPlTX+AIVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDcaiAAFXD1ujAAAAAElFTkSuQmCC" alt="" srcset="" width="250px" height="200px" style={{borderRadius: "15px", margin: "15px"}}/>
+    }
     <div style={styles.main}>
       <div>
         <h1>{event.title}</h1>
         <div>
           <p>Topic: <b >{event.topic}</b></p>
         </div>
-        <p><b>Description: </b> {event.description}</p>
-        <Link to={`/events/${event.id}`}>See the Details</Link>
+        <Link to={`/events/${event.id}`} style={{textDecoration: 'none'}}>See the Details</Link>
       </div>
+    </div>
     </div>
   );
 }
