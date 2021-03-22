@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../AuthContext";
 import { useHistory } from "react-router-dom";
-import GroupCard from "../../../components/groups_card";
+// import GroupCard from "../../../components/groups_card";
 import axios from "axios";
 import { Typography } from "@material-ui/core";
+import MyGroupCard from "../../my_groups_card";
+
 
 const base = axios.create({
   baseURL: "http://localhost:8000/",
@@ -44,7 +46,7 @@ function YourGroups() {
             {
               console.log(grp);
             }
-            return <GroupCard group={grp} />;
+            return <MyGroupCard group={grp}/>;
           }
         })}
       </div>

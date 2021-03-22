@@ -75,6 +75,7 @@ class Event(BaseModel):
     image: str
     details: str
     prereqs: str
+    group: str
 
 def randomString(stringLength=5):
     letters = string.ascii_lowercase
@@ -171,7 +172,8 @@ def add_event(request: Event):
             u'description': request.description,
             u'image': request.image,
             u'prereqs': request.prereqs,
-            u'details': request.details
+            u'details': request.details,
+            u'group': request.group,
         })
         print(request)
         return "Event created!!"
@@ -205,6 +207,16 @@ def joinGroupById(id:str, member: str):
     ref = db.collection(u'Groups').document(id)
     ref.update(group)
     return "Done!!"
+
+@app.get('/groups/groupbyhost/{Creator}')
+def groupbyhost(Creator: str):
+    grps = groups()
+    a = []
+    for group in grps:
+        if group["Creator"] == Creator:
+            a.append(group)
+    return a            
+
 
 @app.post('/events/{id}/{member}')
 def joinEventById(id:str, member: str):
@@ -241,6 +253,16 @@ def getTopicsForGroups():
     for event in events:
         topics.add(event["topic"])
     return topics
+
+@app.get('/group/events-of-group/{id}')
+def get_events_of_group(id: str):
+    events = get_all_events()
+    res = []
+    for event in events:
+        if event["group"] == id:
+            res.append(event)
+    return res
+
 
 # if __name__ == "__main__":
 #     uvicorn.run("app.api:app", host="0.0.0.0", port=8000, reload=True)
