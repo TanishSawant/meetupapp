@@ -46,7 +46,7 @@ function YourGroups() {
             {
               console.log(grp);
             }
-            return <MyGroupCard group={grp}/>;
+            return <MyGroupCard group={grp} events={grp.events}/>;
           }
         })}
       </div>

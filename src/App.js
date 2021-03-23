@@ -16,6 +16,7 @@ import EventDetails from './components/Pages/Events/EventDetails';
 import EventsForm from './components/Pages/Events/Make_events';
 import MyEvents from './components/Pages/Events/MyEvents';
 import GroupsWithTopic from './components/Pages/Groups/GroupsWithTopic'
+import GroupDetails from './components/Pages/Groups/GroupDetails';
 
 const useStyles = makeStyles((theme)=>{
   
@@ -39,6 +40,7 @@ function App() {
         <PrivateRoutes path="/groups" component={GroupList}/>
         <PrivateRoutes path="/events/:id"><EventDetails/></PrivateRoutes>
         <PrivateRoutes path="/groups-with/:topic"><GroupsWithTopic/></PrivateRoutes>
+        <PrivateRoutes path="/groups-with/:id"><GroupDetails/></PrivateRoutes>
         <PrivateRoutes path="/mygroups" component={YourGroups}/>
         <PrivateRoutes path="/myevents" component={MyEvents}/>
         <Route path="/" component={Home} />

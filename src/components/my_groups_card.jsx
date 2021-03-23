@@ -53,34 +53,52 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MyGroupCard({ group }) {
+export default function MyGroupCard({ group, events }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 //   const {currentUser} = useAuth();
   const [user, setUser] = useState("");
   const history = useHistory();
   const {currentUser} = useAuth();
-  const [events, setEvents] = useState([]);
+  // const [events, setEvents] = useState([]);
   useEffect(() => {
     setUser(currentUser.email);
     console.log("***************************");
     console.log(currentUser.email);
   });
+
   useEffect(() => {
     console.log(user);
   }, [user])
 
   useEffect(() => {
-      const response = base.get(`/group/events-of-group/${group.id}`).then((res) =>{
-        setEvents(res.data);
-      });
-  })
+    console.log(user);
+  }, [user])
 
-  useEffect(() =>{
-      console.log(events);
-  }, [events]);
+  useEffect(() => {
+    console.log(user);
+  }, [user])
 
-  const handleExpandClick = () => {
+  useEffect(() => {
+    console.log(user);
+  }, [user])
+
+  useEffect(() => {
+    console.log(user);
+  }, [user])
+
+  
+  // useEffect(() => {
+  //   // console.log()
+  //   setEvents(group.events);
+  // },[]);
+
+  useEffect(() => {
+    console.log("////////////////////////");
+    console.log(events);
+  }, []);
+
+  const handleExpandClick = async() => {
     setExpanded(!expanded);
   };
 
@@ -91,7 +109,7 @@ export default function MyGroupCard({ group }) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            {/* {group.title.charAt(0)} */}R
+             {group.title.charAt(0)}
           </Avatar>
         }
         action={
@@ -102,11 +120,11 @@ export default function MyGroupCard({ group }) {
         title={group.title}
         subheader={`created by ${group.Creator}`}
       />
-      <CardMedia
+      {/* <CardMedia
         className={classes.media}
         image="/static/images/cards/paella.jpg"
         title="Paella dish"
-      />
+      /> */}
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {group.description}
@@ -129,9 +147,11 @@ export default function MyGroupCard({ group }) {
           <Typography paragraph>
             <b>Topic:</b> {group.topic}
             <br/>
-                {events.map((event)=>{
+                {events?
+                  events.map((event)=>{
                     return <div><Link style={{textDecoration: 'none'}} to={`/events/${event.id}`}>{event.title}</Link><br/></div>
-                })}
+                  }): <h3 color="red">No Events From This Group</h3> 
+                }
           </Typography>
         </CardContent>
       </Collapse>

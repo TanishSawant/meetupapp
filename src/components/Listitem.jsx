@@ -24,10 +24,15 @@ const styles = {
     flexDirection: "column",
     justifyContent: "space-evenly",
     backgroundColor: "#FFFFFF",
+    wrap: 'wrap',
+    textSize: "1rem"
   },
+
   outer: {
     display: "flex",
     flexDirection: "row",
+    // justifyContent: "spaceBetween",
+    // alignItems: "center",
   }
 };
 
@@ -37,7 +42,8 @@ function Listitem({ event }) {
   return (
     <div style={styles.outer}>
       {event.image? 
-      <img src={event.image} alt="" srcset="" width="250px" height="200px" style={{borderRadius: "15px", margin: "15px"}}/>
+      //250, 200
+      <img src={event.image} alt="" srcset="" width="26%" height="23%" style={{borderRadius: "15px", margin: "15px"}}/>
         : <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAA1BMVEX//wCKxvRFAAAASElEQVR4nO3BgQAAAADDoPlTX+AIVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDcaiAAFXD1ujAAAAAElFTkSuQmCC" alt="" srcset="" width="250px" height="200px" style={{borderRadius: "15px", margin: "15px"}}/>
     }
     <div style={styles.main}>

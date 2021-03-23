@@ -175,7 +175,26 @@ def add_event(request: Event):
             u'details': request.details,
             u'group': request.group,
         })
-        print(request)
+        # print(request)
+        ref2 = db.collection(u'Groups').document(request.group)
+        group1: Dict = get_group_by_id(request.group)
+        print("***********************")
+        print(group1)
+        if "events" in group1.keys():
+            group1["events"].append({
+                "id": request.id,
+                "title": request.title.upper()
+            })
+            print(group1)
+        else:
+            group1["events"] = list()
+            group1["events"].append({
+                "id": request.id,
+                "title": request.title.upper()
+            })
+            print("***********************")
+            print(group1)
+        ref2.update(group1)
         return "Event created!!"
     except Exception as e:
         print(e)
