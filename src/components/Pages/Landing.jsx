@@ -109,7 +109,7 @@ const styles = {
     listevents: {
         borderRight: '1px solid',
         width: '50%',
-        paddingRight: '1%'
+        marginRight: '1%'
     },
     main_body_div:{
         borderTop: '1px solid',

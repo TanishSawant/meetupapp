@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {useAuth} from '../../../AuthContext'
 import {useHistory, Link} from 'react-router-dom'
 import axios from 'axios';
-import {Typography} from '@material-ui/core'
+import {Typography, List} from '@material-ui/core'
+import Listitem from '../../Listitem'
 
 const base = axios.create({
     baseURL: 'http://localhost:8000/'
@@ -37,22 +38,24 @@ function MyEvents() {
                 <Typography variant="h2">Your Events</Typography>
                 <p>Logged in As {currentUser.email}</p>
                 <div style={styles.flexContainer}>
-                    <ul>
-
+                
+                <List>
                 {
                     events.map((grp) => {
                         if(grp.people_going.includes(currentUser.email)){
                             {console.log(grp)}
                             return (
-                                <li>
-                                    {grp.title}
-                                    <Link to={`/events/${grp.id}`}>See details</Link>
-                                </li>
+                                <div >
+                                    <Listitem event={grp} style={{minWidth:'700px'}}/>
+                                    {/* <Link to={`/events/${grp.id}`}>See details</Link> */}
+                                </div>
                             );
                         }
                     })
                 }
-                    </ul>
+                    
+                </List>
+                
                     
             </div>
         </div> 

@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     maxWidth: "100%",
+    paddingTop: '1%',
     backgroundColor: theme.palette.background.paper,
   },
   inline: {
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 const styles = {
   main: {
+    // minWidth: '600px',
     borderTop: "1px solid lightgrey",
     borderBottom: "1px solid lightgrey",
     minHeight: "15%",
