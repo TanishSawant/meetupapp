@@ -227,6 +227,22 @@ def joinGroupById(id:str, member: str):
     ref.update(group)
     return "Done!!"
 
+@app.post('/groups/{id}/leave-group/{member}')
+def leave_group(id:str, member:str):
+    group: Dict = get_group_by_id(id)
+    print('********************************')
+    # print(group)
+    group["members"].remove(member)
+    ref = db.collection(u'Groups').document(id)
+    ref.update(group)
+    return "Done!!"
+
+@app.post(u'/groups_123/delete/{id}')
+def delete_group(id:str):
+    ref = db.collection(u'Groups').document(id)
+    ref.delete()
+    return "Done!! Group deleted! RIP" 
+
 @app.get('/groups/groupbyhost/{Creator}')
 def groupbyhost(Creator: str):
     grps = groups()
@@ -281,6 +297,7 @@ def get_events_of_group(id: str):
         if event["group"] == id:
             res.append(event)
     return res
+
 
 
 # if __name__ == "__main__":

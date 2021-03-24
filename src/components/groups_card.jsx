@@ -19,6 +19,9 @@ import { Button } from "@material-ui/core";
 import axios from "axios"
 import {useAuth} from '../AuthContext'
 import {useHistory} from 'react-router-dom'
+// import IconButton from '@material-ui/core/IconButton';
+// import Menu from '@material-ui/core/Menu';
+// import MenuItem from '@material-ui/core/MenuItem';
 
 const base = axios.create({
     baseURL: 'http://localhost:8000/'
@@ -74,8 +77,10 @@ export default function GroupCard({ group }) {
     const params = [group.id, user]
     base.post(`groups/${group.id}/${user}`, params)
     console.log("Joined group!!")
+    history.push('/dashboard')
     // window.location.reload();
   }
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -133,6 +138,8 @@ export default function GroupCard({ group }) {
             {group.members.includes(user) && 
                 <p style={{color: 'green'}}>You are already a member of this group!</p>
             }
+            
+            
         </CardContent>
       </Collapse>
     </Card>}
