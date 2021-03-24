@@ -11,7 +11,7 @@ import datetime
 from six import u
 # import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
-
+import uvicorn
 
 
 # cred={
@@ -59,6 +59,7 @@ class Group(BaseModel):
     topic: str
     id: str
     description: str
+    image: str
 
 
 class Event(BaseModel):
@@ -113,6 +114,7 @@ def add_group(request: Group):
             u'topic': request.topic.upper(),
             u'id': request.id,
             u'description': request.description,
+            u'image': request.image
         })
         return "Done"
     except:
@@ -298,7 +300,7 @@ def get_events_of_group(id: str):
             res.append(event)
     return res
 
-
+#web: gunicorn -w 3 -k uvicorn.workers.UvicornWorker main:app
 
 # if __name__ == "__main__":
-#     uvicorn.run("app.api:app", host="0.0.0.0", port=8000, reload=True)
+#     uvicorn.run("main:app", host="0.0.0.0", port=5000)

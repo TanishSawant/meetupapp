@@ -93,7 +93,7 @@ export default function GroupCard({ group }) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            {/* {group.title.charAt(0)} */}R
+            {group.title.charAt(0)}
           </Avatar>
         }
         action={
@@ -106,7 +106,7 @@ export default function GroupCard({ group }) {
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
+        image={group.image}
         title="Paella dish"
       />
       <CardContent>

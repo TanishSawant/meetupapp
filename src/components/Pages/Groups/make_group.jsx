@@ -33,7 +33,7 @@ const styles = {
   secondaryContainer: {
     padding: "1%",
     backgroundColor: "white",
-    height: "100vh",
+    minHeight: "120vh",
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
@@ -83,6 +83,7 @@ function Make_group() {
       id: makeid(8),
       members: [currentUser.email],
       description: desc,
+      image: image
     };
     base
       .post("/groups", grp)
@@ -96,6 +97,7 @@ function Make_group() {
   const [title, setTitle] = useState("");
   const [topic, setTopic] = useState("");
   const [desc, setDesc] = useState("");
+  const [image, setImage] = useState("");
 
   const handleChangeTitle = (e) => {
     console.log(e.target.value);
@@ -110,6 +112,10 @@ function Make_group() {
   const handleChangeDesc = (e) => {
     console.log(e.target.value);
     setDesc(e.target.value);
+  };
+  const handleChangeImage = (e) => {
+    console.log(e.target.value);
+    setImage(e.target.value);
   };
 
   return (
@@ -140,7 +146,15 @@ function Make_group() {
           type="text"
           style={styles.textFields}
         />
-{/* 
+
+        <TextField
+          label="Link To thumbnail image"
+          value={image}
+          onChange={handleChangeImage}
+          type="text"
+          style={styles.textFields}
+        />
+        {/* 
         <div>
           <Button
             aria-controls="simple-menu"

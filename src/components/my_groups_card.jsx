@@ -100,12 +100,14 @@ export default function MyGroupCard({ group, events }) {
   };
   const deleteGroup = (e) => {
     e.preventDefault();
-    const params = [group.id]
-    const result = base.post(`/groups_123/delete/${group.id}`, params).then((response) => {
-      console.log(response);
-    })
+    const params = [group.id];
+    const result = base
+      .post(`/groups_123/delete/${group.id}`, params)
+      .then((response) => {
+        console.log(response);
+      });
     console.log("Delete group!!");
-    history.push('/dashboard');
+    history.push("/dashboard");
   };
 
   const leaveGroup = (e) => {
@@ -117,7 +119,7 @@ export default function MyGroupCard({ group, events }) {
         console.log(resp.data);
       });
     console.log("Leave group!!");
-    history.push('/dashboard');
+    history.push("/dashboard");
   };
 
   return (
@@ -143,6 +145,11 @@ export default function MyGroupCard({ group, events }) {
         image="/static/images/cards/paella.jpg"
         title="Paella dish"
       /> */}
+          <CardMedia
+            className={classes.media}
+            image={group.image}
+            title="Paella dish"
+          />
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
               {group.description}
