@@ -29,6 +29,14 @@ function MyEvents() {
 
     useEffect(() => {
         console.log("Happy")
+        events.sort(function(a,b){
+            return new Date(b.date) - new Date(a.date);
+          });
+        console.log(events);
+    }, [events]);
+
+    useEffect(() => {
+        console.log("Sorted events: ")
         console.log(events);
     }, [events]);
 
