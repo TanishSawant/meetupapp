@@ -1,12 +1,5 @@
 # WeMeet
 
-## Table of Contents
-
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
-
 Open Opportunity to hear from the experts.
 
 
