@@ -200,10 +200,10 @@ function EventsForm() {
   };
 
   return (
-    <div>
+    <div >
       <div style={styles.main_container}>
         <div style={styles.secondaryContainer}>
-          <h1>Create Group</h1>
+          <h1>Create New Event</h1>
           <h3>Host: {currentUser.email}</h3>
           <TextField
             label="Title"
@@ -338,7 +338,7 @@ function EventsForm() {
 const styles = {
   main_container: {
     padding: "0%",
-    backgroundColor: "aliceblue",
+    backgroundColor: "orange",
     display: "flex",
     alignItems: "center",
     flexDirection: "column",

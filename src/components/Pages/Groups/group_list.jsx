@@ -77,12 +77,12 @@ function GroupList() {
   };
 
   return (
-    <div style={{ backgroundColor: "#FFFFFF" }}>
+    <div style={{ backgroundColor: "orange" }}>
       <Typography
         variant="h2"
         color="textSecondary"
         component="p"
-        style={{ marginLeft: "20%", marginTop: "5%" }}
+        style={{ marginLeft: "20%", marginTop: "5%", color:"white" }}
       >
         Find The Group With Like-minded people
       </Typography>
@@ -136,7 +136,7 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     flexWrap: "wrap",
-    backgroundColor: "white",
+    backgroundColor: "orange",
   },
   topics_div: {
     marginLeft: "40%",

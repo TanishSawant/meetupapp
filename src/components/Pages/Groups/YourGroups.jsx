@@ -36,9 +36,9 @@ function YourGroups() {
 
 
   return (
-    <div>
-      <Typography variant="h2">Your Groups</Typography>
-      <p>As {currentUser.email}</p>
+    <div style={{backgroundColor:"orange"}}>
+      <Typography variant="h2" style={{color: 'white', marginLeft: '40%', marginTop: "5%"}}>Your Groups</Typography>
+      
       
       <div style={styles.flexContainer}>
         {groups.map((grp) => {
@@ -62,7 +62,7 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     flexWrap: "wrap",
-    backgroundColor: "white",
+    backgroundColor: "orange",
   },
 };
 

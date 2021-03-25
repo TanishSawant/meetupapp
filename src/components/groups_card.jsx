@@ -96,11 +96,11 @@ export default function GroupCard({ group }) {
             {group.title.charAt(0)}
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        // action={
+        //   <IconButton aria-label="settings">
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
         title={group.title}
         subheader={`created by ${group.Creator}`}
       />

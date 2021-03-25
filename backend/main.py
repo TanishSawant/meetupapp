@@ -8,7 +8,7 @@ import random
 import string
 from typing import List
 import datetime
-from six import u
+# from six import u
 # import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
@@ -52,6 +52,7 @@ db = firestore.client()
 #                         u'title' : a,
 #                         u'link' : link
 #                     })
+
 class Group(BaseModel):
     Creator: str
     title: str
@@ -91,6 +92,8 @@ def isPresent(x, array):
 @app.get('/')
 def greet():
     return "Hello world!"
+
+
 
 #get all groups
 @app.get('/groups')

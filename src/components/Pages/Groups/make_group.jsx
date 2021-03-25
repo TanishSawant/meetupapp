@@ -12,7 +12,7 @@ const base = axios.create({
 const styles = {
   main_container: {
     padding: "0%",
-    backgroundColor: "aliceblue",
+    backgroundColor: "orange",
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
