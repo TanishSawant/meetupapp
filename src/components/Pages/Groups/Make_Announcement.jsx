@@ -188,7 +188,7 @@ function Make_Announcement() {
           <h1>Create New Event</h1>
           <h3>Host: {currentUser.email}</h3>
           <TextField
-            label="Subject"
+            label="Subject(Mention your group name:)"
             value={title}
             onChange={handleChangeTitle}
             type="text"
