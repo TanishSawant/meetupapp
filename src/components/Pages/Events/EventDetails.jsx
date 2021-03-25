@@ -3,9 +3,9 @@ import { withRouter, useHistory } from "react-router-dom";
 import axios from "axios";
 import HideAppBar from "../../../CustomAppBar";
 import { Button, Typography } from "@material-ui/core";
-import {useAuth} from '../../../AuthContext'
+import { useAuth } from "../../../AuthContext";
 import CustomJoinEventButton from "./customJoinEventButton";
-import emailjs from 'emailjs-com';
+import emailjs from "emailjs-com";
 
 const base = axios.create({
   baseURL: "http://localhost:8000/",
@@ -14,9 +14,10 @@ const base = axios.create({
 function EventDetails(props) {
   console.warn(props);
   const [event, setEvent] = useState({});
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
   const history = useHistory();
   const [alreadyIn, setIn] = useState(false);
+  const [n, setN] = useState(0);
 
   // async function getEvents() {
   //     const res = base.get(`/events/${props.match.params.id}`).then((res) => {
@@ -28,13 +29,22 @@ function EventDetails(props) {
   // }
 
   const sendEmail = (parameters) => {
-    emailjs.send('service_4ak6lhq', 'template_2utmm0b', parameters, 'user_NXdsmzIIiTz4UvZSCC87Z')
-      .then((result) => {
+    emailjs
+      .send(
+        "service_4ak6lhq",
+        "template_2utmm0b",
+        parameters,
+        "user_NXdsmzIIiTz4UvZSCC87Z"
+      )
+      .then(
+        (result) => {
           console.log(result.text);
-      }, (error) => {
+        },
+        (error) => {
           console.log(error.text);
-      });
-  }
+        }
+      );
+  };
 
   useEffect(() => {
     async function getEvents() {
@@ -51,7 +61,6 @@ function EventDetails(props) {
     console.log(event);
   }, [event]);
 
-
   // useEffect(() => {
   //   setPeople(event.people_going);
   // }, [event]);
@@ -60,16 +69,15 @@ function EventDetails(props) {
   //   console.log(people_going);
   // }, [people_going]);
 
-
   const joinEvent = (e) => {
     e.preventDefault();
-    props = [event.id, currentUser.email]
-    if(event.people_going.includes(currentUser.email)){
-      console.log("Already in!!")
+    props = [event.id, currentUser.email];
+    if (event.people_going.includes(currentUser.email)) {
+      console.log("Already in!!");
       setIn(true);
-      return <h1>Already in!!</h1>
+      return <h1>Already in!!</h1>;
     }
-    base.post(`events/${event.id}/${currentUser.email}`, props)
+    base.post(`events/${event.id}/${currentUser.email}`, props);
     console.log("You are going!!");
     const params = {
       message: `The link to the event is: ${event.link}
@@ -77,10 +85,10 @@ function EventDetails(props) {
       `,
       to_email: currentUser.email,
       title: event.title,
-    }
+    };
     sendEmail(params);
-    history.push('/dashboard');
-  }
+    history.push("/dashboard");
+  };
 
   return (
     <div style={styles.main}>
@@ -90,7 +98,6 @@ function EventDetails(props) {
         <div style={styles.scheduleDiv}>
           <h3>Date: {event.date} </h3>
           <h3>Time: {event.time}</h3>
-          
         </div>
         <div style={styles.textDiv}>
           <Typography variant="body1">
@@ -109,12 +116,28 @@ function EventDetails(props) {
             <b>Prior Knowledge: </b>
             {event.prereqs}
           </Typography>
-          {
-            !alreadyIn && <Button variant="outlined" onClick={joinEvent}>Attend Event</Button>
-          }
-          {
-            alreadyIn && <h5 style={{color: 'green'}}>You are Going for this Event!</h5>
-          }
+          
+          
+          {currentUser.email === event.host?
+              <div>
+                <h4>People Attending: </h4>
+                <ul>
+                  {event.people_going.map(user =>{
+                    return <li>{user}</li>
+                  })}
+                </ul>
+              </div>  
+          : null}
+
+          
+          {!alreadyIn && (
+            <Button variant="outlined" onClick={joinEvent}>
+              Attend Event
+            </Button>
+          )}
+          {alreadyIn && (
+            <h5 style={{ color: "green" }}>You are Going for this Event!</h5>
+          )}
 
           {/* <CustomJoinEventButton event={event} onPress={joinEvent} currentUser={currentUser} /> */}
           <hr />

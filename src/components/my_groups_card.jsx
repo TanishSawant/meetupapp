@@ -172,6 +172,7 @@ export default function MyGroupCard({ group, events }) {
               <Typography paragraph>
                 <b>Topic:</b> {group.topic}
                 <br />
+                <hr/>
                 {events ? (
                   events.map((event) => {
                     return (
