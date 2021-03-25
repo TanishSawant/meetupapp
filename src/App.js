@@ -17,6 +17,7 @@ import EventsForm from './components/Pages/Events/Make_events';
 import MyEvents from './components/Pages/Events/MyEvents';
 import GroupsWithTopic from './components/Pages/Groups/GroupsWithTopic'
 import GroupDetails from './components/Pages/Groups/GroupDetails';
+import Make_Announcement from './components/Pages/Groups/Make_Announcement';
 
 const useStyles = makeStyles((theme)=>{
   
@@ -43,6 +44,7 @@ function App() {
         <PrivateRoutes path="/groups-with/:id"><GroupDetails/></PrivateRoutes>
         <PrivateRoutes path="/mygroups" component={YourGroups}/>
         <PrivateRoutes path="/myevents" component={MyEvents}/>
+        <PrivateRoutes path="/make_new_announcement" component={Make_Announcement}/>
         <Route path="/" component={Home} />
       </Switch>
     </div>

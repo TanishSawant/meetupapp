@@ -191,9 +191,12 @@ export default function MyGroupCard({ group, events }) {
                   <h3 color="red">No Events From This Group</h3>
                 )}
                 {group.Creator === currentUser.email ? (
-                  <Button variant="outlined" onClick={deleteGroup}>
-                    Delete Group
-                  </Button>
+                  <div>
+                    <Button variant="outlined" onClick={deleteGroup}>
+                      Delete Group
+                    </Button>
+                    
+                  </div>
                 ) : (
                   <Button
                     variant="outlined"

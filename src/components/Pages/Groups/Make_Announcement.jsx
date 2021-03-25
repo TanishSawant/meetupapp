@@ -1,3 +1,4 @@
+// import React from "react";
 import React, { useState, useEffect } from "react";
 import { TextField, Button, Menu, MenuItem } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
@@ -7,21 +8,29 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import emailjs from 'emailjs-com';
+import emailjs from "emailjs-com";
 
 const sendEmail = (parameters) => {
-  emailjs.send('service_4ak6lhq', 'template_4cromur', parameters, 'user_NXdsmzIIiTz4UvZSCC87Z')
-    .then((result) => {
+  emailjs
+    .send(
+      "service_4ak6lhq",
+      "template_2utmm0b",
+      parameters,
+      "user_NXdsmzIIiTz4UvZSCC87Z"
+    )
+    .then(
+      (result) => {
         console.log(result.text);
-    }, (error) => {
+      },
+      (error) => {
         console.log(error.text);
-    });
-}
+      }
+    );
+};
 
 const base = axios.create({
   baseURL: "http://localhost:8000/",
 });
-
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -34,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 function makeid(length) {
   var result = "";
   var characters =
@@ -46,14 +54,13 @@ function makeid(length) {
   return result;
 }
 
-function EventsForm() {
+function Make_Announcement() {
   const { currentUser } = useAuth();
   const history = useHistory();
   const [myGroups, setMyGroups] = React.useState([]);
   // const [group, setGroup] = React.useState(null);
   const [open, setOpen] = useState(false);
   const [group, setGroup] = React.useState(null);
-
 
   useEffect(() => {
     const res = base
@@ -66,7 +73,7 @@ function EventsForm() {
 
   useEffect(() => {
     console.log(myGroups);
-    console.log(group)
+    console.log(group);
   }, [myGroups, group]);
 
   // const handleClick = (event) => {
@@ -77,20 +84,18 @@ function EventsForm() {
     setOpen(true);
   };
 
-
-  const handleChange = async(event) => {
+  const handleChange = async (event) => {
     await setGroup(event.target.value);
     // console.log(`${group} was selected`);
   };
 
   useEffect(() => {
-    if(group === null || group === undefined) {
-      console.log("No group selected")
-    }else{
+    if (group === null || group === undefined) {
+      console.log("No group selected");
+    } else {
       console.log(`${group.title} was selected`);
     }
   }, [group]);
-  
 
   const handleClose = () => {
     setOpen(false);
@@ -118,39 +123,17 @@ function EventsForm() {
   const onSubmit = (e) => {
     console.log("object");
     e.preventDefault();
-    const event = {
-      host: currentUser.email,
-      title: title,
-      people_going: [currentUser.email],
-      topic: topic,
-      id: makeid(12),
-      link: link,
-      date: formatDate(date),
-      time: time,
-      online: true,
-      description: desc,
-      image: image,
-      details: details,
-      prereqs: prer,
-      group: group.id
-    };
-    base
-      .post("/events", event)
-      .then((response) => {
-        console.log(response.data);
+    // console.log(response.data);
         console.log("Successful!");
-        group.members.forEach(member => {
+        group.members.forEach((member) => {
           var params = {
             to_email: member,
-            group_name: group.title,
+            message: desc,
+            subject: title
           };
           sendEmail(params);
-          console.log("Ok")
+          console.log("Ok");
         });
-      })
-      .catch((error) => {
-        console.error("There was an error!", error);
-      });
     routeChange();
   };
 
@@ -198,15 +181,14 @@ function EventsForm() {
     console.log(e.target.value);
     setImage(e.target.value);
   };
-
   return (
-    <div >
+    <div>
       <div style={styles.main_container}>
         <div style={styles.secondaryContainer}>
           <h1>Create New Event</h1>
           <h3>Host: {currentUser.email}</h3>
           <TextField
-            label="Title"
+            label="Subject"
             value={title}
             onChange={handleChangeTitle}
             type="text"
@@ -214,51 +196,9 @@ function EventsForm() {
           />
 
           <TextField
-            label="Topic"
-            value={topic}
-            onChange={handleChangeTopic}
-            type="text"
-            style={styles.textFields}
-          />
-
-          <TextField
-            label="Desc"
+            label="Message"
             value={desc}
             onChange={handleChangeDesc}
-            type="text"
-            style={styles.textFields}
-            multiline={true}
-          />
-
-          <TextField
-            label="Link Of the Event Thumbnail image"
-            value={image}
-            onChange={handleChangeImage}
-            type="text"
-            style={styles.textFields}
-          />
-
-          <TextField
-            label="Link To the Event Meet"
-            value={link}
-            onChange={handleChangeLink}
-            type="text"
-            style={styles.textFields}
-          />
-
-          <TextField
-            label="Details"
-            value={details}
-            onChange={handleChangeDetails}
-            type="text"
-            style={styles.textFields}
-            multiline={true}
-          />
-
-          <TextField
-            label="Expected Prior Knowledge"
-            value={prer}
-            onChange={handleChangePrer}
             type="text"
             style={styles.textFields}
             multiline={true}
@@ -275,7 +215,7 @@ function EventsForm() {
                 open={open}
                 onClose={handleClose}
                 onOpen={handleOpen}
-                value={group? group.title: "Select Group"}
+                value={group ? group.title : "Select Group"}
                 onChange={handleChange}
               >
                 {myGroups.map((grp) => {
@@ -284,50 +224,12 @@ function EventsForm() {
               </Select>
             </FormControl>
           </div>
-          <TextField
-            id="Date"
-            label="Date"
-            onChange={(value) => {
-              const temp = value.target.value;
-              formatDate(temp);
-              console.log(temp);
-              setDate(temp);
-            }}
-            type="date"
-            defaultValue="2017-05-24T10:30"
-            value={date}
-            // className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            style={styles.textFields}
-          />
-
-          <TextField
-            id="time"
-            label="Time"
-            type="time"
-            value={time}
-            onChange={(value) => {
-              setTime(value.target.value);
-              console.log(value);
-            }}
-            defaultValue="07:30"
-            // className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            inputProps={{
-              step: 300, // 5 min
-            }}
-            style={styles.textFields}
-          />
           <Button
             variant="outlined"
             onClick={onSubmit}
             style={{ marginTop: "5%", marginBottom: "5%" }}
           >
-            Create Event
+            Send!
           </Button>
         </div>
       </div>
@@ -369,4 +271,4 @@ const styles = {
   },
 };
 
-export default EventsForm;
+export default Make_Announcement;

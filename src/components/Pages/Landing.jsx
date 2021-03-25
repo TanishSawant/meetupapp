@@ -45,6 +45,10 @@ function Landing() {
         e.preventDefault();
         history.push('/myevents');
     }
+    function handleMakeAnnouncement(e) {
+        e.preventDefault();
+        history.push('/make_new_announcement');
+    }
     useEffect(() => {
         // async function getGroups() {
         //     const request = base.get('/groups')
@@ -70,6 +74,7 @@ function Landing() {
                         <Button onClick={handleLogout}>Logout</Button>
                         <Button onClick={handleCreateEvent}>New Event</Button>
                         <Button onClick={handleMyEvents}>My Events</Button>
+                        <Button onClick={handleMakeAnnouncement}>Make an announcement</Button>
                         {/* <Button>Profile</Button> */}
                     </div>
                 </div>

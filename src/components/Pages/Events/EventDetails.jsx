@@ -80,11 +80,12 @@ function EventDetails(props) {
     base.post(`events/${event.id}/${currentUser.email}`, props);
     console.log("You are going!!");
     const params = {
-      message: `The link to the event is: ${event.link}
+      message: `You have been successfully registered to the event: ${event.title} The link to the event is: ${event.link}
         Please do not share this link with others.
       `,
       to_email: currentUser.email,
       title: event.title,
+      subject: 'Event Registration!!'
     };
     sendEmail(params);
     history.push("/dashboard");
@@ -126,9 +127,8 @@ function EventDetails(props) {
                     return <li>{user}</li>
                   })}
                 </ul>
-              </div>  
+              </div>
           : null}
-
           
           {!alreadyIn && (
             <Button variant="outlined" onClick={joinEvent}>
