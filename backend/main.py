@@ -14,16 +14,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 
-# cred={
-#   'apiKey': "AIzaSyDZiQxLHFbamQ7VRSW67fmzXoV7xUqhsac",
-#   'authDomain': "meetup-8405b.firebaseapp.com",
-#   'projectId': "meetup-8405b",
-#   'storageBucket': "meetup-8405b.appspot.com",
-#   'messagingSenderId': "435894963109",
-#   'appId': "1:435894963109:web:5516acf58b6334011ef64c",
-#   'measurementId': "G-W0DVPH0NKT"
-# }
-
 cred = credentials.Certificate("./service.json")
 firebase_admin.initialize_app(cred)
 
@@ -44,14 +34,6 @@ app.add_middleware(
 )
 
 db = firestore.client()
-
-# db.collection(u'Groups').add({'title': 'London Devs', 'Creator': 'John Lennon', 'members':['Aaron', 'Pablo']})
-#  ref = db.collection(u'Announcements').document("a" + randomString())
-
-#                     ref.set({
-#                         u'title' : a,
-#                         u'link' : link
-#                     })
 
 class Group(BaseModel):
     Creator: str
